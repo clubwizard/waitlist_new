@@ -10,13 +10,11 @@ class WaitlistEntryPolicy
 {
     /**
      * Determine whether the user can view the waitlist for a specific restaurant.
-     * Note: Actual filtering happens in the controller, this is a general check.
-     * For now, any authenticated user might manage *some* waitlist.
-     * Refine later with roles/permissions if needed.
+     * User must be associated with the restaurant.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user, Restaurant $restaurant): bool
     {
-        return $user->exists; // Basic check: is the user logged in?
+        return $user->id === $restaurant->user_id;
     }
 
     /**
@@ -29,13 +27,12 @@ class WaitlistEntryPolicy
     }
 
     /**
-     * Determine whether the user can create waitlist entries (for staff).
+     * Determine whether the user can create waitlist entries (for staff) for a specific restaurant.
      * User must be associated with the restaurant they are adding to.
-     * The controller should pass the restaurant context.
      */
-    public function create(User $user): bool
+    public function create(User $user, Restaurant $restaurant): bool
     {
-        return $user->exists;
+        return $user->id === $restaurant->user_id;
     }
 
     /**
