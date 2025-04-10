@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('waitlist_entries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('restaurant_id')->index();
-            $table->unsignedBigInteger('customer_id')->index();
+            $table->unsignedBigInteger('customer_id')->nullable()->index(); // Allow null for public entries
             $table->string('name'); // Customer name at time of entry
             $table->string('email'); // Customer email at time of entry
             $table->string('phone_number'); // Customer phone at time of entry

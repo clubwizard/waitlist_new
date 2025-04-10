@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('waitlist_entries', function (Blueprint $table) {
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null'); // Staff user is optional
         });
     }
@@ -25,7 +24,6 @@ return new class extends Migration
     {
         Schema::table('waitlist_entries', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['customer_id']);
             $table->dropForeign(['restaurant_id']);
         });
     }
