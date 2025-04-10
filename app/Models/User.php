@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'active',
+        'last_login_at',
     ];
 
     /**
@@ -39,6 +42,31 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+
+    /**
+     * Get the restaurants managed by the user.
+     */
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
+
+    /**
+     * Get the messages sent/received by the user.
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    /**
+     * Get the waitlist entries managed by the user.
+     */
+    public function waitlistEntries()
+    {
+        return $this->hasMany(WaitlistEntry::class);
+    }
+
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
