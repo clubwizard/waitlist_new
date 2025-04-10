@@ -61,8 +61,6 @@ class WaitlistManagementController extends Controller
                          ->with('success', 'Waitlist entry added successfully.');
     }
 
-    }
-
     /**
      * Update the status of a waitlist entry.
      */
