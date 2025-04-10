@@ -41,7 +41,7 @@ class PublicWaitlistController extends Controller
             'email' => $validatedData['email'] ?? null,
             'party_size' => $validatedData['party_size'],
             'estimated_wait_time' => $restaurant->average_wait_time ?? 15, // Default or calculated
-            'status' => 'waiting', // Default status
+            'status' => 'pending', // Corrected default status to match migration ENUM
             'notes' => $validatedData['notes'] ?? null,
         ]);
 
