@@ -14,6 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \App\Models\Restaurant::class => \App\Policies\RestaurantPolicy::class,
+        \App\Models\WaitlistEntry::class => \App\Policies\WaitlistEntryPolicy::class,
+
     ];
 
     /**

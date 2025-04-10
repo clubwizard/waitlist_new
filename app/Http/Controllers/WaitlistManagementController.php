@@ -15,6 +15,8 @@ class WaitlistManagementController extends Controller
      */
     public function index(Restaurant $restaurant)
     {
+        $this->authorize('viewAny', [WaitlistEntry::class, $restaurant]); // Check if user can view any entries for this restaurant
+
 
         $waitlistEntries = $restaurant->waitlistEntries()
                                       ->whereIn('status', ['pending', 'notified']) // Show active entries
@@ -29,6 +31,8 @@ class WaitlistManagementController extends Controller
      */
     public function updateStatus(Request $request, WaitlistEntry $entry)
     {
+
+        $this->authorize('update', $entry); // Check if user can update this specific entry
 
         $validated = $request->validate([
             'status' => ['required', Rule::in(['pending', 'seated', 'cancelled', 'no_show'])],
@@ -52,6 +56,8 @@ class WaitlistManagementController extends Controller
      */
     public function destroy(WaitlistEntry $entry)
     {
+
+        $this->authorize('delete', $entry); // Check if user can delete this specific entry
 
         $entry->delete();
 
