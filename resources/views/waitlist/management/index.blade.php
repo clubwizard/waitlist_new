@@ -1,6 +1,9 @@
-@extends('layouts.app') {{-- Assuming a main layout file exists --}}
-
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Waitlist Management: {{ $restaurant->name }}
+        </h2>
+    </x-slot>
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Waitlist Management: {{ $restaurant->name }}</h1>
@@ -73,4 +76,4 @@
         {{ $waitlistEntries->links() }}
     </div>
 </div>
-@endsection
+</x-app-layout>
