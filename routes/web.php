@@ -39,11 +39,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('restaurants', RestaurantController::class);
-});
 
     Route::get('/restaurants/{restaurant}/waitlist', [WaitlistManagementController::class, 'index'])->name('restaurants.waitlist.index');
     Route::patch('/waitlist-entries/{entry}/status', [WaitlistManagementController::class, 'updateStatus'])->name('waitlist.entries.updateStatus');
     Route::delete('/waitlist-entries/{entry}', [WaitlistManagementController::class, 'destroy'])->name('waitlist.entries.destroy');
+
+});
 
 
 require __DIR__.'/auth.php';
