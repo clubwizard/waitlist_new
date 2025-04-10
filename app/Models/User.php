@@ -42,6 +42,11 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'active' => 'boolean', // Add cast for active status
+        'last_login_at' => 'datetime', // Add cast for last login
+    ];
 
     /**
      * Get the restaurants managed by the user.
@@ -67,7 +72,4 @@ class User extends Authenticatable
         return $this->hasMany(WaitlistEntry::class);
     }
 
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
 }
