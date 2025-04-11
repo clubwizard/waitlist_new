@@ -20,6 +20,12 @@ use App\Http\Controllers\WaitlistManagementController;
 
 
 Route::get('/', function () {
+    $restaurant = \App\Models\Restaurant::where('active', true)->first();
+    
+    if ($restaurant) {
+        return redirect()->route('public.waitlist.show', $restaurant->slug);
+    }
+    
     return view('welcome');
 })->name('home');
 
