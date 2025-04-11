@@ -37,7 +37,7 @@ class PublicWaitlistController extends Controller
             'restaurant_id' => $restaurant->id,
             'customer_id' => null, // Placeholder - needs customer logic
             'name' => $validatedData['name'],
-            'phone_number' => $validatedData['phone'], // Corrected key to match DB column
+            'phone_number' => $request->input('country_code') . $validatedData['phone'], // Include country code
             'email' => $validatedData['email'] ?? null,
             'party_size' => $validatedData['party_size'],
             'estimated_wait_time' => $restaurant->average_wait_time ?? 15, // Default or calculated

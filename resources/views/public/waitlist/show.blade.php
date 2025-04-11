@@ -120,10 +120,20 @@
                 <!-- Phone Number -->
                 <div class="mb-4">
                     <label for="phone" class="block form-label text-sm font-medium">{{ __('Phone Number') }}</label>
-                    {{-- TODO: Add country code dropdown --}}
-                    <input id="phone" class="block mt-1 w-full form-input rounded-md shadow-sm"
-                           type="tel" name="phone" value="{{ old('phone') }}" required />
-                     @error('phone')
+                    <div class="flex">
+                        <select name="country_code" class="form-input rounded-l-md shadow-sm" style="width: 100px; border-right: none;">
+                            <option value="+1" {{ old('country_code', '+1') == '+1' ? 'selected' : '' }}>+1 (US)</option>
+                            <option value="+44" {{ old('country_code') == '+44' ? 'selected' : '' }}>+44 (UK)</option>
+                            <option value="+61" {{ old('country_code') == '+61' ? 'selected' : '' }}>+61 (AU)</option>
+                            <option value="+33" {{ old('country_code') == '+33' ? 'selected' : '' }}>+33 (FR)</option>
+                            <option value="+49" {{ old('country_code') == '+49' ? 'selected' : '' }}>+49 (DE)</option>
+                            <option value="+971" {{ old('country_code') == '+971' ? 'selected' : '' }}>+971 (UAE)</option>
+                            <!-- Add more country codes as needed -->
+                        </select>
+                        <input id="phone" class="block w-full form-input rounded-r-md shadow-sm"
+                               type="tel" name="phone" value="{{ old('phone') }}" required placeholder="(XXX) XXX-XXXX" />
+                    </div>
+                    @error('phone')
                         <p class="error-message">{{ $message }}</p>
                     @enderror
                 </div>

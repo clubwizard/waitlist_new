@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Restaurant;
 use App\Models\User;
 use App\Models\WaitlistEntry;
 use Illuminate\Auth\Access\Response;

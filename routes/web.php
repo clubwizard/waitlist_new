@@ -28,11 +28,10 @@ Route::prefix('waitlist')->name('public.waitlist.')->group(function () {
     Route::post('/{restaurant:slug}', [PublicWaitlistController::class, 'store'])->name('store');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/restaurants/{restaurant}/waitlist/create', [WaitlistManagementController::class, 'create'])->name('restaurants.waitlist.create');
     Route::post('/restaurants/{restaurant}/waitlist', [WaitlistManagementController::class, 'store'])->name('restaurants.waitlist.store');
 
-
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

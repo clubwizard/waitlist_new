@@ -29,8 +29,18 @@
                         <!-- Phone Number -->
                         <div class="mt-4">
                             <x-input-label for="phone" :value="__('Phone Number')" />
-                            {{-- TODO: Add country code dropdown later --}}
-                            <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required />
+                            <div class="flex mt-1">
+                                <select name="country_code" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-l-md shadow-sm" style="width: 100px; border-right: none;">
+                                    <option value="+1" {{ old('country_code', '+1') == '+1' ? 'selected' : '' }}>+1 (US)</option>
+                                    <option value="+44" {{ old('country_code') == '+44' ? 'selected' : '' }}>+44 (UK)</option>
+                                    <option value="+61" {{ old('country_code') == '+61' ? 'selected' : '' }}>+61 (AU)</option>
+                                    <option value="+33" {{ old('country_code') == '+33' ? 'selected' : '' }}>+33 (FR)</option>
+                                    <option value="+49" {{ old('country_code') == '+49' ? 'selected' : '' }}>+49 (DE)</option>
+                                    <option value="+971" {{ old('country_code') == '+971' ? 'selected' : '' }}>+971 (UAE)</option>
+                                    <!-- Add more country codes as needed -->
+                                </select>
+                                <x-text-input id="phone" class="w-full rounded-l-none" type="tel" name="phone" :value="old('phone')" required placeholder="(XXX) XXX-XXXX" />
+                            </div>
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
 
