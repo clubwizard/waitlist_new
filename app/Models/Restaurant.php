@@ -72,4 +72,12 @@ class Restaurant extends Model
     {
         return $this->hasMany(Message::class);
     }
+    
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
