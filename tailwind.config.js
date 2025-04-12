@@ -12,7 +12,21 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                'tableready-green': '#28a745',
+                'tableready-orange': '#ff7f00',
+                'tableready-yellow': '#ffcc00',
+            },
+            boxShadow: {
+                'apple-sm': '0 2px 5px rgba(0, 0, 0, 0.05)',
+                'apple-md': '0 4px 10px rgba(0, 0, 0, 0.08)',
+                'apple-lg': '0 10px 25px rgba(0, 0, 0, 0.1)',
+                'apple-xl': '0 20px 40px rgba(0, 0, 0, 0.12)',
+            },
+            borderRadius: {
+                'apple': '0.85rem',
             },
         },
     },

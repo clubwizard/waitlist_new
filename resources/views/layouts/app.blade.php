@@ -15,21 +15,35 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
         <style>
+            body {
+                font-family: 'Poppins', sans-serif;
+            }
+            
+            /* TableReady Branding */
             .tableready-header {
                 background-color: #28a745;
                 color: white;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             }
             
             .tableready-logo {
                 font-weight: bold;
                 font-size: 1.5rem;
                 color: white;
+                transition: transform 0.2s ease;
+            }
+            
+            .tableready-logo:hover {
+                transform: scale(1.02);
             }
             
             .tableready-logo span {
-                color: #ffcc00;
+                background: linear-gradient(90deg, #ff7f00, #ffcc00);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
             
+            /* Apple-style UI Elements */
             .back-button {
                 display: inline-flex;
                 align-items: center;
@@ -39,15 +53,112 @@
                 border-radius: 9999px;
                 font-size: 0.875rem;
                 font-weight: 500;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                transition: all 0.2s ease;
             }
             
+            .back-button:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            }
+            
+            /* Card Styling */
+            .card {
+                background-color: white;
+                border-radius: 0.85rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                overflow: hidden;
+            }
+            
+            .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Status Cards */
+            .status-card {
+                padding: 1.5rem;
+                text-align: center;
+                border-radius: 0.85rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+                transition: all 0.2s ease;
+            }
+            
+            .status-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+            }
+            
+            .status-card .count {
+                font-size: 3rem;
+                font-weight: 700;
+                line-height: 1;
+            }
+            
+            .status-card .label {
+                font-size: 1.125rem;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+            }
+            
+            .status-card.waiting {
+                background-color: #28a745;
+                color: white;
+            }
+            
+            .status-card.notified {
+                background-color: #4299e1;
+                color: white;
+            }
+            
+            .status-card.seated {
+                background-color: #28a745;
+                color: white;
+            }
+            
+            .status-card.cancelled {
+                background-color: #f56565;
+                color: white;
+            }
+            
+            /* Button Styling */
+            .btn {
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            }
+            
+            .btn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            }
+            
+            .btn:active {
+                transform: translateY(1px);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+            
+            .btn-primary {
+                background-color: #28a745;
+                color: white;
+            }
+            
+            .btn-primary:hover {
+                background-color: #218838;
+            }
+            
+            /* Mobile Specific Styles */
             @media (max-width: 640px) {
                 .mobile-waitlist-header {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     padding: 1rem;
+                    background-color: white;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
                 }
                 
                 .mobile-back-button {
@@ -56,8 +167,34 @@
                     border-radius: 9999px;
                     padding: 0.5rem 1rem;
                     font-size: 0.875rem;
-                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                    transition: all 0.2s ease;
                 }
+                
+                .mobile-back-button:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+                }
+            }
+            
+            /* Table Styling */
+            .table-container {
+                border-radius: 0.85rem;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            }
+            
+            /* Form Styling */
+            .form-input {
+                border-radius: 0.5rem;
+                transition: all 0.2s ease;
+                border: 1px solid #e2e8f0;
+            }
+            
+            .form-input:focus {
+                border-color: #28a745;
+                box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+                outline: none;
             }
         </style>
     </head>
