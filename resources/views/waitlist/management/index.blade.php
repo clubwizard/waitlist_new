@@ -4,13 +4,29 @@
             Waitlist Management: {{ $restaurant->name }}
         </h2>
     </x-slot>
+    
+    <!-- Mobile Header with Back Button (Mobile Only) -->
+    <div class="md:hidden mobile-waitlist-header bg-white shadow-sm">
+        <h1 class="text-xl font-bold">Main Waitlist - Waitlist Dashboard</h1>
+        <a href="{{ route('dashboard') }}" class="mobile-back-button">
+            Back to Waitlists
+        </a>
+    </div>
+    
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Waitlist Management: {{ $restaurant->name }}</h1>
+        <div class="flex items-center">
+            <!-- Back Button (Desktop Only) -->
+            <a href="{{ route('dashboard') }}" class="back-button mr-4 hidden md:flex">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Waitlists
+            </a>
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Waitlist Management: {{ $restaurant->name }}</h1>
+        </div>
         {{-- Add button for manually adding entries later --}}
         <a href="{{ route('restaurants.waitlist.create', $restaurant) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Party</a>
-
-        {{-- <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Party</a> --}}
     </div>
 
     @if(session('success'))
