@@ -32,20 +32,36 @@ class PublicWaitlistController extends Controller
 
         $validatedData = $request->validated();
 
-
-        WaitlistEntry::create([
+        \Log::info('Attempting to create waitlist entry', [
             'restaurant_id' => $restaurant->id,
-            'customer_id' => null, // Placeholder - needs customer logic
             'name' => $validatedData['name'],
-            'phone_number' => $request->input('country_code') . $validatedData['phone'], // Include country code
+            'phone' => $request->input('country_code') . $validatedData['phone'],
             'email' => $validatedData['email'] ?? null,
-            'party_size' => $validatedData['party_size'],
-            'estimated_wait_time' => $restaurant->average_wait_time ?? 15, // Default or calculated
-            'status' => 'pending', // Corrected default status to match migration ENUM
-            'notes' => $validatedData['notes'] ?? null,
+            'party_size' => $validatedData['party_size']
         ]);
 
-        return redirect()->route('public.waitlist.show', $restaurant->slug)
+        try {
+            $entry = WaitlistEntry::create([
+                'restaurant_id' => $restaurant->id,
+                'customer_id' => null, // Placeholder - needs customer logic
+                'name' => $validatedData['name'],
+                'phone_number' => $request->input('country_code') . $validatedData['phone'], // Include country code
+                'email' => $validatedData['email'] ?? null,
+                'party_size' => $validatedData['party_size'],
+                'estimated_wait_time' => $restaurant->average_wait_time ?? 15, // Default or calculated
+                'status' => 'pending', // Corrected default status to match migration ENUM
+                'notes' => $validatedData['notes'] ?? null,
+            ]);
+            
+            \Log::info('Waitlist entry created successfully', ['entry_id' => $entry->id]);
+        } catch (\Exception $e) {
+            \Log::error('Failed to create waitlist entry', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+        }
+
+        return redirect()->back()
                          ->with('success', 'You have been added to the waitlist!');
     }
 }

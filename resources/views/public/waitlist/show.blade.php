@@ -94,8 +94,9 @@
             <h2 class="text-2xl font-semibold text-center mb-6">Join the Waitlist</h2>
 
             {{-- TODO: Implement multi-step form later --}}
-            <form method="POST" action="{{ route('public.waitlist.store', $restaurant->slug) }}">
+            <form method="POST" action="{{ url('/waitlist/' . $restaurant->slug) }}" accept-charset="UTF-8">
                 @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <!-- Party Size -->
                 <div class="mb-4">

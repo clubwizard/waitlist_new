@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('restaurant_id')->index();
             $table->unsignedBigInteger('customer_id')->nullable()->index(); // Allow null for public entries
             $table->string('name'); // Customer name at time of entry
-            $table->string('email'); // Customer email at time of entry
+            $table->string('email')->nullable(); // Customer email at time of entry
             $table->string('phone_number'); // Customer phone at time of entry
             $table->integer('party_size');
             $table->enum('status', ['pending', 'seated', 'cancelled', 'no_show'])->default('pending')->index();

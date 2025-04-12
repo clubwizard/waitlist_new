@@ -25,6 +25,7 @@ class StoreWaitlistEntryRequest extends FormRequest
             'party_size' => ['required', 'integer', 'min:1', 'max:20'], // Example max size
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:30'], // Basic validation, consider library like `propaganistas/laravel-phone` later
+            'country_code' => ['required', 'string', 'max:10'], // Country code validation
             'email' => ['nullable', 'email', 'max:255'],
             'notes' => ['nullable', 'string', 'max:1000'],
         ];

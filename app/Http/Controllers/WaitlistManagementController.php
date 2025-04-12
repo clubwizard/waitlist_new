@@ -7,6 +7,7 @@ use App\Models\WaitlistEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\StoreWaitlistEntryRequest;
 
 class WaitlistManagementController extends Controller
 {
