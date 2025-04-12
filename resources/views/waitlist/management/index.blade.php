@@ -72,8 +72,11 @@
                             </form>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            {{-- Add Notify button later --}}
-                            {{-- <button class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-2">Notify</button> --}}
+                            <a href="{{ route('waitlist.entries.edit', $entry) }}" class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-2">Edit</a>
+                            <form action="{{ route('waitlist.entries.notify', $entry) }}" method="POST" class="inline-block">
+                                @csrf
+                                <button type="submit" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-2">Notify</button>
+                            </form>
                             <form action="{{ route('waitlist.entries.destroy', $entry) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to remove this entry?');">
                                 @csrf
                                 @method('DELETE')

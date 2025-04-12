@@ -68,11 +68,10 @@ class WaitlistManagementController extends Controller
      */
     public function updateStatus(Request $request, WaitlistEntry $entry)
     {
-
         $this->authorize('update', $entry); // Check if user can update this specific entry
 
         $validated = $request->validate([
-            'status' => ['required', Rule::in(['pending', 'seated', 'cancelled', 'no_show'])],
+            'status' => ['required', Rule::in(['pending', 'notified', 'seated', 'cancelled', 'no_show'])],
         ]);
 
         $entry->status = $validated['status'];
@@ -86,6 +85,62 @@ class WaitlistManagementController extends Controller
         $entry->save();
 
         return back()->with('success', 'Waitlist entry status updated.');
+    }
+    
+    /**
+     * Notify a customer that their table is ready.
+     */
+    public function notify(WaitlistEntry $entry)
+    {
+        $this->authorize('update', $entry);
+        
+        $entry->status = 'notified';
+        $entry->notified_at = now();
+        $entry->save();
+        
+        return back()->with('success', 'Customer has been notified.');
+    }
+    
+    /**
+     * Show the form for editing a waitlist entry.
+     */
+    public function edit(WaitlistEntry $entry)
+    {
+        $this->authorize('update', $entry);
+        
+        $restaurant = $entry->restaurant;
+        
+        return view('waitlist.management.edit', compact('entry', 'restaurant'));
+    }
+    
+    /**
+     * Update the specified waitlist entry in storage.
+     */
+    public function update(Request $request, WaitlistEntry $entry)
+    {
+        $this->authorize('update', $entry);
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'country_code' => 'required|string|max:10',
+            'email' => 'nullable|email|max:255',
+            'party_size' => 'required|integer|min:1',
+            'notes' => 'nullable|string|max:1000',
+            'estimated_wait_time' => 'nullable|integer|min:1',
+        ]);
+        
+        $entry->name = $validated['name'];
+        $entry->phone_number = $validated['country_code'] . $validated['phone'];
+        $entry->email = $validated['email'];
+        $entry->party_size = $validated['party_size'];
+        $entry->notes = $validated['notes'];
+        $entry->estimated_wait_time = $validated['estimated_wait_time'];
+        
+        $entry->save();
+        
+        return redirect()->route('restaurants.waitlist.index', $entry->restaurant)
+                         ->with('success', 'Waitlist entry updated successfully.');
     }
 
     /**

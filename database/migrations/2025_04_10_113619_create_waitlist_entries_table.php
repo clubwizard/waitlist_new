@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable(); // Customer email at time of entry
             $table->string('phone_number'); // Customer phone at time of entry
             $table->integer('party_size');
-            $table->enum('status', ['pending', 'seated', 'cancelled', 'no_show'])->default('pending')->index();
+            $table->enum('status', ['pending', 'notified', 'seated', 'cancelled', 'no_show'])->default('pending')->index();
             $table->integer('position')->nullable(); // Position in the queue
             $table->integer('estimated_wait_time')->nullable(); // In minutes
             $table->integer('quoted_wait_time')->nullable(); // In minutes

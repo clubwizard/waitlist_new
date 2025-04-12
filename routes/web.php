@@ -51,6 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/restaurants/{restaurant}/waitlist', [WaitlistManagementController::class, 'index'])->name('restaurants.waitlist.index');
     Route::patch('/waitlist-entries/{entry}/status', [WaitlistManagementController::class, 'updateStatus'])->name('waitlist.entries.updateStatus');
     Route::delete('/waitlist-entries/{entry}', [WaitlistManagementController::class, 'destroy'])->name('waitlist.entries.destroy');
+    Route::get('/waitlist-entries/{entry}/edit', [WaitlistManagementController::class, 'edit'])->name('waitlist.entries.edit');
+    Route::put('/waitlist-entries/{entry}', [WaitlistManagementController::class, 'update'])->name('waitlist.entries.update');
+    Route::post('/waitlist-entries/{entry}/notify', [WaitlistManagementController::class, 'notify'])->name('waitlist.entries.notify');
 
 });
 
